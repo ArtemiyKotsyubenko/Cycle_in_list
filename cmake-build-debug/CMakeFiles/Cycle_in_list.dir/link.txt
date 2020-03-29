@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/Cycle_in_list.dir/main.c.o  -o Cycle_in_list 
