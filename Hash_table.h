@@ -66,7 +66,21 @@ void rehash(HashTable *hash_table) {//size
     hash_table->table = new_table;
 }
 
+bool find(HashTable *hash_table, void *value){
+    int index = count_hash(value, hash_table->size);
+    for(Node_* pv = hash_table->table[index].head; pv != NULL; pv = pv->next){
+        if (pv->ptr == value){
+            return true;
+        }
+
+    }
+    return  false;
+}
+
 void insert(HashTable *hash_table, void *value) {
+    if( find(hash_table, value)){
+        return;
+    }
     ++hash_table->amount_of_elements;
     hash_table->coefficient = hash_table->amount_of_elements * 100 / hash_table->size;
     if (hash_table->coefficient > 75) {
@@ -84,15 +98,6 @@ void insert(HashTable *hash_table, void *value) {
 
 }
 
-bool find(HashTable *hash_table, void *value){
-    int index = count_hash(value, hash_table->size);
-    for(Node_* pv = hash_table->table[index].head; pv != NULL; pv = pv->next){
-        if (pv->ptr == value){
-            return true;
-        }
 
-    }
-    return  false;
-}
 
 #endif //CYCLE_IN_LIST_HASH_TABLE_H
